@@ -1,78 +1,110 @@
-# SELAB-LAB
+import java.awt.List;
 import java.util.ArrayList;
-import java.util.Scanner;
-
-public class Patron 
+import java.util.Collections;
+import java.util.Scanner; 
+import java.util.Collections; 
+public class Library 
 {
-	Scanner input = new Scanner(System.in);
-	private String first; 
-	private String last; 
-	int bookCount = 0;	//amount books user has in pocket
-	int books = 0;
-	
-	
-	//constructor to "add new patron" by entering their name. 
-	public Patron(String f, String l)
-	{
-		first = f; 
-		last = l; 
-	}
-	
-	public String toString()
-	{
-		return first + " " + last; 
-	}
-	
-	public String getName() 
-	{
-		return first +  " " + last; 
-	}
 
-	public static void CheckOutBook()
+
+	static ArrayList <Patron> UserList = new ArrayList<Patron>();
+	static ArrayList <String> BookList = new ArrayList <String> (); 
+	
+	public static String status;
+	public static String borrower; 
+	public static String borrowDate; 
+	public static String returnDate; 
+	public String status1 = "Available";
+	public String status2 = "Borrowed";
+	
+	
+	public static void main(String[] args)
 	{
-		System.out.println("Enter book title to be check out: ");
 		Scanner input = new Scanner(System.in);
-		String bookCheckOut = input.next(); 
-		if(Library.BookList.contains(bookCheckOut))
-		{
-			Library.BookList.remove(bookCheckOut);
-			System.out.println("-----" + bookCheckOut + " has been checked out!-----");
-			System.out.println ("-------" + bookCheckOut + " is due in 7 days!-------");
-							
-		}
-		else 
-			System.out.println(bookCheckOut + " is not in the library. Please enter "
-			+ "a different book to be checked out");
+		int choice = 0;
+		System.out.println("********************Welcome to the Public Library!********************");
+		System.out.println("              Please Select From The Following Options:               ");
+		System.out.println("**********************************************************************");
 		
-	}
-	
-	public static void CheckInBook()
-	{
-		System.out.println("Enter book title to be checked in: ");
-		Scanner input = new Scanner(System.in);
-		String bookCheckIn = input.next(); 
-		if(Library.BookList.contains(bookCheckIn))
+		while(choice != 9)
 		{
-			Library.BookList.add(bookCheckIn);
-			System.out.println("-----" + bookCheckIn + " has been checked in!-----");	
-							
-		}
-		else 
-			System.out.println(bookCheckIn + " is not in the library. Please enter "
-			+ "a different book to be checked out");
-	}
-	
-	public boolean canBorrow()
-	{
-		if(bookCount <= 3)
-		{
-			return true; 
-		} 
-		else 
-		{
-			return false; 
-		}
-	}
+			System.out.println("1: Add new patron");
+			System.out.println("2: Add new book");
+			System.out.println("3: Edit patron");
+			System.out.println("4: Edit book");
+			System.out.println("5: Display all patrons");
+			System.out.println("6: Display all books");
+			System.out.println("7: Check out book");
+			System.out.println("8: Check in book");
+			System.out.println("9: Search book");
+			System.out.println("10: Search Patron");
+			System.out.println("9: Exit");
+			choice = input.nextInt();
 
+			
+		switch(choice)
+		{
+		case 1: //Add new patron
+			System.out.print("Enter patron first name: ");
+			String firstName = input.next(); //read name from input
+			System.out.print("Enter patron last name: ");
+			String lastName = input.next(); 
+
+			UserList.add(new Patron(firstName, lastName)); //add name to list
+			System.out.println("-----You have successfully added a new patron!-----");
+			break; 
+							
+		case 2: //Add new book
+			System.out.print("Enter book title: ");
+			String title1 = input.next();
+				
+			Scanner input1 = new Scanner(System.in);
+			System.out.print("Enter book author: ");
+			String author1 = input.next(); 
+
+			Book book1 = new Book(title1);				
+			BookList.add(title1);
+			FullBookList.add(fullBook);
+			System.out.println("-----You have successfully added a new book!-----");
+			
+			status = "available";
+			borrowDate = "none";
+			returnDate = "none";
+			borrower = "none";
+			
+			break; 
+			
+		case 3: //Edit patron name
+			System.out.println("Enter original patron name: ");
+			String originalName = input.next(); 
+			System.out.println("Enter edited patron name: ");
+			String editedName = input.next(); 
+			//Collections.replaceAll(UserList, originalName, editedName);
+			if(UserList.contains(originalName))
+			{
+				
+			}
+				
+		case 4: //edit book
+			
+			
+		case 5: //display all patrons	
+				System.out.println(UserList); 
+				break; 
+				
+		case 6: //display all books 
+				System.out.println(BookList); 
+				break; 
+				
+		case 7: //check out a book
+				Patron.CheckOutBook(); 
+				break; 
+		case 8: //check in a book
+				Patron.CheckInBook(); 
+				break; 
+				
+			
+			}
+		}
+	}
 }
- 
